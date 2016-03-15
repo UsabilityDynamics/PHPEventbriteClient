@@ -1,0 +1,11 @@
+{
+  "name": "PHPEventbriteClient",
+  "description": "Eventbrite API v3",
+  "version": "0.0.1",
+  "require": {},
+  "autoload": {
+    "classmap": [
+      "lib/"
+    ]
+  }
+}

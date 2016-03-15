@@ -75,11 +75,6 @@ namespace UsabilityDynamics {
      */
     private function get_http_client() {
 
-      // Prioritize WP
-      if ( function_exists( 'wp_remote_get' ) && function_exists('wp_remote_post') ) {
-        return new WP_HTTP_Client();
-      }
-
       // Curl
       if ( function_exists( 'curl_init' ) ) {
         return new Curl_HTTP_Client();
