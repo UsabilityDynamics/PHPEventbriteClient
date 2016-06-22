@@ -46,18 +46,40 @@ namespace UsabilityDynamics {
     }
 
     /**
-     * @return mixed|void
+     * @return array|mixed|object
+     * @throws \Exception
      */
     public function get() {
-      return $this->http_client->get( $this->build_url(), array( "Authorization: Bearer " . $this->token ) );
+      $response = $this->http_client->get( $this->build_url(), array( "Authorization: Bearer " . $this->token ) );
+
+      if ( !$response = json_decode( $response ) ) {
+        throw new \Exception( 'Invalid API Response JSON' );
+      }
+
+      if ( !empty( $response->error ) ) {
+        throw new \Exception( $response->error_description );
+      }
+
+      return $response;
     }
 
     /**
      * @param $data
-     * @return mixed|void
+     * @return array|mixed|object
+     * @throws \Exception
      */
     public function post( $data ) {
-      return $this->http_client->post( $this->build_url(), $data, array( "Authorization: Bearer " . $this->token ) );
+      $response = $this->http_client->post( $this->build_url(), $data, array( "Authorization: Bearer " . $this->token ) );
+
+      if ( !$response = json_decode( $response ) ) {
+        throw new \Exception( 'Invalid API Response JSON' );
+      }
+
+      if ( !empty( $response->error ) ) {
+        throw new \Exception( $response->error_description );
+      }
+
+      return $response;
     }
 
     /**
