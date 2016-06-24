@@ -46,11 +46,12 @@ namespace UsabilityDynamics {
     }
 
     /**
+     * @param array $args
      * @return array|mixed|object
      * @throws \Exception
      */
-    public function get() {
-      $response = $this->http_client->get( $this->build_url(), array( "Authorization: Bearer " . $this->token ) );
+    public function get( $args = array() ) {
+      $response = $this->http_client->get( $this->build_url( $args ), array( "Authorization: Bearer " . $this->token ) );
 
       if ( !$response = json_decode( $response ) ) {
         throw new \Exception( 'Invalid API Response JSON' );
@@ -83,10 +84,16 @@ namespace UsabilityDynamics {
     }
 
     /**
+     * @param array $args
      * @return string
      */
-    private function build_url() {
+    private function build_url( $args = array() ) {
       $url = $this->endpoint . implode( '/', $this->uri ) . '/';
+
+      if ( !empty( $args ) && is_array( $args ) ) {
+        $url .= '?' . http_build_query( $args, null, '&' );
+      }
+
       $this->uri = array();
       return $url;
     }
