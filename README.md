@@ -5,5 +5,5 @@ PHP Client for Eventbrite API v3
 
 ```php
 $client = new EventbriteClient( ACCESS_TOKEN );
-$attendees = $client->events()->id( 26596375063 )->attendees()->get();
+$attendees = $client->events()->id( 2659635063 )->attendees()->get();
 ```
